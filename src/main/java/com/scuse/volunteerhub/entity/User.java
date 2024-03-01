@@ -18,7 +18,7 @@ import lombok.Setter;
  * </p>
  *
  * @author DL
- * @since 2024-03-01 02:51:38
+ * @since 2024-03-01 04:15:22
  */
 @Getter
 @Setter
@@ -41,7 +41,7 @@ public class User implements Serializable {
 
     private String maritalStatus;
 
-    private LocalDate dateOfBirth;
+    private LocalDate birthdate;
 
     @Email(message = "邮箱格式不正确")
     private String email;

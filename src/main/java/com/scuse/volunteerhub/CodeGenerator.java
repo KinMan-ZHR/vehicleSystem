@@ -32,17 +32,17 @@ public class CodeGenerator {
                             .enableFileOverride() // 覆盖已生成文件
                             .naming(NamingStrategy.underline_to_camel)  //数据库表映射到实体的命名策略：下划线转驼峰命
                             .columnNaming(NamingStrategy.underline_to_camel)    //数据库表字段映射到实体的命名策略：下划线转驼峰命
-                            // Mapper 策略配置
-                            .mapperBuilder()
-                            .enableFileOverride() // 覆盖已生成文件
-                            // Service 策略配置
-                            .serviceBuilder()
-                            .enableFileOverride() // 覆盖已生成文件
-                            .formatServiceFileName("%sService") //格式化 service 接口文件名称，%s进行匹配表名，如 UserService
-                            .formatServiceImplFileName("%sServiceImpl") //格式化 service 实现类文件名称，%s进行匹配表名，如 UserServiceImpl
-                            // Controller 策略配置
-                            .controllerBuilder()
-                            .enableFileOverride() // 覆盖已生成文件
+//                            // Mapper 策略配置
+//                            .mapperBuilder()
+//                            .enableFileOverride() // 覆盖已生成文件
+//                            // Service 策略配置
+//                            .serviceBuilder()
+//                            .enableFileOverride() // 覆盖已生成文件
+//                            .formatServiceFileName("%sService") //格式化 service 接口文件名称，%s进行匹配表名，如 UserService
+//                            .formatServiceImplFileName("%sServiceImpl") //格式化 service 实现类文件名称，%s进行匹配表名，如 UserServiceImpl
+//                            // Controller 策略配置
+//                            .controllerBuilder()
+//                            .enableFileOverride() // 覆盖已生成文件
                     ;
                 })
                 .execute();

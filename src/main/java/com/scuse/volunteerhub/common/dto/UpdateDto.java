@@ -18,7 +18,7 @@ public class UpdateDto implements Serializable {
 
     private String avatar;
 
-    private LocalDateTime dateOfBirth;
+    private LocalDateTime birthdate;
 
     @Email(message = "邮箱格式不正确")
     private String email;
