@@ -6,6 +6,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,6 +30,7 @@ public class User implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    @NotBlank(message = "昵称不能为空")
     private String username;
 
     private String password;
@@ -39,6 +43,7 @@ public class User implements Serializable {
 
     private LocalDate dateOfBirth;
 
+    @Email(message = "邮箱格式不正确")
     private String email;
 
     private String tel;
