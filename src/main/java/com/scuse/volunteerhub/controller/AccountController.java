@@ -41,16 +41,23 @@ public class AccountController {
 
         response.setHeader("Authorization", jwt);
         response.setHeader("Access-control-Expose-Headers", "Authorization");
-
-        user.setLastLogin(LocalDateTime.now());
         userService.updateById(user);
 
         return Result.success("登录成功", MapUtil.builder()
-                .put("id", user.getId())
-                .put("username", user.getUsername())
-                .put("email", user.getEmail())
-                .put("token", jwt)
-                .map());
+                .put("user", MapUtil.builder()
+                    .put("id", user.getId())
+                    .put("username", user.getUsername())
+                    .put("avatar", user.getAvatar())
+                    .put("maritalStatus", user.getMaritalStatus())
+                    .put("sex", user.getSex())
+                    .put("dateOfBirth", user.getDateOfBirth())
+                    .put("email", user.getEmail())
+                    .put("tel", user.getTel())
+                    .put("address", user.getAddress())
+                    .put("statement", user.getStatement())
+                    .put("token", jwt)
+                    .map()
+                ).map());
     }
 
     @PostMapping("/register")
@@ -66,15 +73,19 @@ public class AccountController {
         user.setCreated(LocalDateTime.now());
         userService.save(user);
         return Result.success("注册成功", MapUtil.builder()
-                .put("id", user.getId())
-                .put("username", user.getUsername())
-                .put("email", user.getEmail())
-                .map());
+                .put("user", MapUtil.builder()
+                        .put("id", user.getId())
+                        .put("username", user.getUsername())
+                        .put("avatar", user.getAvatar())
+                        .put("maritalStatus", user.getMaritalStatus())
+                        .put("sex", user.getSex())
+                        .put("dateOfBirth", user.getDateOfBirth())
+                        .put("email", user.getEmail())
+                        .put("tel", user.getTel())
+                        .put("address", user.getAddress())
+                        .put("statement", user.getStatement())
+                        .map()
+                ).map());
     }
 
-    @GetMapping("/logout")
-    public Result logout(){
-
-        return Result.success(null);
-    }
 }

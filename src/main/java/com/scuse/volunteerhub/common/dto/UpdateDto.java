@@ -10,12 +10,20 @@ import java.time.LocalDateTime;
 public class UpdateDto implements Serializable {
     private String username;
 
+    private String sex;
+
+    private String maritalStatus;
+
     private String avatar;
+
+    private LocalDateTime dateOfBirth;
 
     @Email(message = "邮箱格式不正确")
     private String email;
 
-    private String password;
+    private String tel;
 
-    private LocalDateTime lastLogin;
+    private String address;
+
+    private String password;
 }

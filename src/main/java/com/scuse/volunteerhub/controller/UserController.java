@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 /**
  * <p>
  *  前端控制器
@@ -36,11 +38,19 @@ public class UserController {
         if (user != null) {
             String jwt = jwtUtils.generateToken(user.getId());
             return Result.success("查询成功", MapUtil.builder()
-                    .put("id", user.getId())
-                    .put("username", user.getUsername())
-                    .put("email", user.getEmail())
-                    .put("token", jwt)
-                    .map());
+                    .put("user", MapUtil.builder()
+                            .put("id", user.getId())
+                            .put("username", user.getUsername())
+                            .put("avatar", user.getAvatar())
+                            .put("maritalStatus", user.getMaritalStatus())
+                            .put("sex", user.getSex())
+                            .put("dateOfBirth", user.getDateOfBirth())
+                            .put("email", user.getEmail())
+                            .put("tel", user.getTel())
+                            .put("address", user.getAddress())
+                            .put("statement", user.getStatement())
+                            .map()
+                    ).map());
         } else {
             return Result.fail("查询失败");
         }
@@ -61,16 +71,25 @@ public class UserController {
     public Result updateUser(@Validated @RequestBody UpdateDto updateDto) {
         User user = userService.getOne(new QueryWrapper<User>().eq("username", updateDto.getUsername()));
         BeanUtils.copyProperties(updateDto, user);
+        user.setLastUpdate(LocalDateTime.now().toLocalDate());
 
         boolean updated = userService.updateById(user);
 
         if (updated) {
-            return Result.success("修改成功", MapUtil.builder()
-                    .put("id", user.getId())
-                    .put("username", user.getUsername())
-                    .put("email", user.getEmail())
-                    .put("token", jwtUtils.generateToken(user.getId()))
-                    .map());
+            return Result.success("更新成功", MapUtil.builder()
+                    .put("user", MapUtil.builder()
+                            .put("id", user.getId())
+                            .put("username", user.getUsername())
+                            .put("avatar", user.getAvatar())
+                            .put("maritalStatus", user.getMaritalStatus())
+                            .put("sex", user.getSex())
+                            .put("dateOfBirth", user.getDateOfBirth())
+                            .put("email", user.getEmail())
+                            .put("tel", user.getTel())
+                            .put("address", user.getAddress())
+                            .put("statement", user.getStatement())
+                            .map()
+                    ).map());
         } else {
             return Result.fail("修改失败");
         }

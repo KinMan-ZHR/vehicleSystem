@@ -8,7 +8,7 @@ import java.util.Collections;
 
 public class CodeGenerator {
     public static void main(String[] args) {
-        FastAutoGenerator.create("jdbc:mysql://localhost:3306/vueblog?characterEncoding=UTF-8&useUnicode=true&useSSL=false", "root", "root")
+        FastAutoGenerator.create("jdbc:mysql://localhost:3306/volunteerhub?characterEncoding=UTF-8&useUnicode=true&useSSL=false", "root", "root")
                 // 全局配置
                 .globalConfig(builder -> {
                     builder.author("DL") // 设置作者
