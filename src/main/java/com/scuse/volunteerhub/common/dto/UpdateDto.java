@@ -1,15 +1,17 @@
 package com.scuse.volunteerhub.common.dto;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 public class UpdateDto implements Serializable {
-    @NotBlank(message = "昵称不能为空")
+    @NotNull(message = "id不能为空")
+    private Long id;
+
     private String username;
 
     private String sex;
@@ -18,7 +20,7 @@ public class UpdateDto implements Serializable {
 
     private String avatar;
 
-    private LocalDateTime birthdate;
+    private LocalDate birthdate;
 
     @Email(message = "邮箱格式不正确")
     private String email;
@@ -28,4 +30,6 @@ public class UpdateDto implements Serializable {
     private String address;
 
     private String password;
+
+    private String statement;
 }

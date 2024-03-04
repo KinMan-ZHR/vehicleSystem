@@ -1,3 +1,5 @@
+web:
+    upload-path: D:/dev/JavaProjects/avatar/
 # DataSource Config
 spring:
     datasource:
@@ -5,6 +7,14 @@ spring:
         url: jdbc:mysql://localhost:3306/volunteerhub?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
         username: root
         password: root
+    mvc:
+        servlet:
+            multipart:
+                max-file-size: 10MB
+                max-request-size: 10MB
+    web:
+        resources:
+            static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/, file:${web.upload-path}
 
 mybatis-plus:
     mapper-locations: classpath*:/mapper/**Mapper.xml

@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -41,6 +42,7 @@ public class User implements Serializable {
 
     private String maritalStatus;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthdate;
 
     @Email(message = "邮箱格式不正确")
@@ -54,5 +56,6 @@ public class User implements Serializable {
 
     private LocalDateTime created;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate lastUpdate;
 }
