@@ -18,6 +18,11 @@ public class WebConfigure implements WebMvcConfigurer {
 //                .addPathPatterns("/**")
 //                .excludePathPatterns("/login");
 //    }
+
+    /**
+     * 将全局接收的前端发来的日期字符串自动转换为日期格式
+     *
+     */
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatterForFieldType(LocalDate.class, new USLocalDateFormatter());

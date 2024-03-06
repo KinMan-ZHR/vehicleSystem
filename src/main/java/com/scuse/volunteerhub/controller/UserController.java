@@ -2,6 +2,9 @@ package com.scuse.volunteerhub.controller;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.crypto.SecureUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.scuse.volunteerhub.common.dto.PasswordDto;
 import com.scuse.volunteerhub.common.dto.UpdateDto;
 import com.scuse.volunteerhub.common.lang.Result;
 import com.scuse.volunteerhub.entity.Imgmap;
@@ -46,32 +49,20 @@ public class UserController {
     @Autowired
     private HttpServletRequest request;
 
-    @Value("${web.upload-path}")
+    @Value("${web.avatar-path}")
     private String uploadPath;
 
     @GetMapping("/userList")
-    public Result getUserById(@RequestParam Long id){
-        User user = userService.getById(id);
-
-        if (user != null) {
-            String jwt = jwtUtils.generateToken(user.getId());
-            return Result.success("查询成功", MapUtil.builder()
-                    .put("user", MapUtil.builder()
-                            .put("id", user.getId())
-                            .put("username", user.getUsername())
-                            .put("avatar", user.getAvatar())
-                            .put("maritalStatus", user.getMaritalStatus())
-                            .put("sex", user.getSex())
-                            .put("birthdate", user.getBirthdate())
-                            .put("email", user.getEmail())
-                            .put("tel", user.getTel())
-                            .put("address", user.getAddress())
-                            .put("statement", user.getStatement())
-                            .map()
-                    ).map());
-        } else {
-            return Result.fail("查询失败");
-        }
+    public Result getUserByPage(@RequestParam Integer pageSize, @RequestParam Integer currPage){
+        Page<User> page = new Page<>(currPage, pageSize);
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.select("id", "username", "sex", "marital_status", "birthdate", "email", "tel", "address", "statement", "avatar", "password");
+        Page<User> resultPage = userService.getUserPageList(page, wrapper);
+        return Result.success("查询成功", MapUtil.builder()
+                .put("userList", resultPage.getRecords())
+                .put("total", resultPage.getTotal())
+                .put("Number", pageSize)
+                .map());
     }
 
     @DeleteMapping("/userList/{id}")
@@ -151,6 +142,20 @@ public class UserController {
                         .put("lastUpdate", user.getLastUpdate())
                         .map())
                 .map());
+    }
+
+    @PostMapping("/editPassword")
+    public Result editPassword(@RequestBody PasswordDto passwordDto) {
+        User user = userService.getById(passwordDto.getId());
+        if (!user.getPassword().equals(SecureUtil.md5(passwordDto.getOldPassword()))) {
+            return Result.fail("密码不正确");
+        }
+
+        user.setPassword(SecureUtil.md5(passwordDto.getNewPassword()));
+        user.setLastUpdate(LocalDateTime.now().toLocalDate());
+        userService.updateById(user);
+
+        return Result.success("密码修改成功");
     }
 
 }

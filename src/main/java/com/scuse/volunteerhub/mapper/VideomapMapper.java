@@ -1,8 +1,9 @@
 package com.scuse.volunteerhub.mapper;
 
-import com.scuse.volunteerhub.entity.User;
+import com.scuse.volunteerhub.entity.Videomap;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -10,9 +11,9 @@ import org.apache.ibatis.annotations.Mapper;
  * </p>
  *
  * @author DL
- * @since 2024-03-01 04:15:22
+ * @since 2024-03-04 04:01:37
  */
 @Mapper
-public interface UserMapper extends BaseMapper<User> {
+public interface VideomapMapper extends BaseMapper<Videomap> {
 
 }

@@ -1,5 +1,7 @@
 web:
-    upload-path: D:/dev/JavaProjects/avatar/
+    avatar-path: D:/dev/JavaProjects/avatar/
+    video-path: D:/dev/JavaProjects/video/
+    videocover-path: D:/dev/JavaProjects/videocover/
 # DataSource Config
 spring:
     datasource:
@@ -7,14 +9,18 @@ spring:
         url: jdbc:mysql://localhost:3306/volunteerhub?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
         username: root
         password: root
-    mvc:
-        servlet:
-            multipart:
-                max-file-size: 10MB
-                max-request-size: 10MB
+    servlet:
+        multipart:
+            max-file-size: 100MB
+            max-request-size: 100MB
     web:
         resources:
-            static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/, file:${web.upload-path}
+            # 注意这里的配置，如果不配置，可能会导致静态资源无法访问，资源访问的链接的相对路径不能包括下面路径头
+            static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/, file:${web.avatar-path}, file:${web.video-path}, file:${web.videocover-path}
+
+server:
+    servlet:
+        connection-payload-size: -1
 
 mybatis-plus:
     mapper-locations: classpath*:/mapper/**Mapper.xml

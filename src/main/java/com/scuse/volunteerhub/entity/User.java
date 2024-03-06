@@ -42,6 +42,9 @@ public class User implements Serializable {
 
     private String maritalStatus;
 
+    /**
+     * 将全局日期格式的数据在发送给前段时转为字符串
+     */
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthdate;
 
