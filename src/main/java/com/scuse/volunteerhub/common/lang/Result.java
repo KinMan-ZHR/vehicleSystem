@@ -22,6 +22,10 @@ public class Result implements Serializable {
         return new Result(401, msg, null);
     }
 
+    public static Result fail(String msg, Object data) {
+        return new Result(401, msg, data);
+    }
+
     private Result(int code, String msg, Object data) {
         this.code = code;
         this.message = msg;

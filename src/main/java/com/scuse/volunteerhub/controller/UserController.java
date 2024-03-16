@@ -13,6 +13,7 @@ import com.scuse.volunteerhub.service.ImgmapService;
 import com.scuse.volunteerhub.service.UserService;
 import com.scuse.volunteerhub.util.JwtUtils;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,6 +35,7 @@ import java.util.UUID;
  * @author DL
  * @since 2024-02-27 02:57:27
  */
+@Slf4j
 @RestController
 public class UserController {
 
@@ -53,10 +55,13 @@ public class UserController {
     private String uploadPath;
 
     @GetMapping("/userList")
-    public Result getUserByPage(@RequestParam Integer pageSize, @RequestParam Integer currPage){
+    public Result getUserByPage(@RequestParam(defaultValue = "100") Integer pageSize,
+                                @RequestParam(defaultValue = "1") Integer currPage){
+        log.warn("获取用户分页列表：pageSize = " + pageSize + ", currPage = " + currPage);
+
         Page<User> page = new Page<>(currPage, pageSize);
         QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "username", "sex", "marital_status", "birthdate", "email", "tel", "address", "statement", "avatar", "password");
+        wrapper.select("id", "username", "sex", "marital_status", "birthdate", "email", "tel", "address", "statement", "avatar", "password", "admin");
         Page<User> resultPage = userService.getUserPageList(page, wrapper);
         return Result.success("查询成功", MapUtil.builder()
                 .put("userList", resultPage.getRecords())
@@ -67,6 +72,7 @@ public class UserController {
 
     @DeleteMapping("/userList/{id}")
     public Result deleteUser(@PathVariable Long id) {
+        log.warn("删除用户：id = " + id);
         boolean deleted = userService.removeById(id);
 
         if (deleted) {
@@ -78,9 +84,10 @@ public class UserController {
 
     @PutMapping("/userList")
     public Result updateUser(@Validated @RequestBody UpdateDto updateDto) {
+        log.warn("更新用户信息：id = " + updateDto.getId() + ", username = " + updateDto.getUsername());
+
         User user = userService.getById(updateDto.getId());
-        updateDto.setPassword(updateDto.getPassword() == null ?
-                user.getPassword() : SecureUtil.md5(updateDto.getPassword()));
+
         BeanUtils.copyProperties(updateDto, user);
         user.setLastUpdate(LocalDateTime.now().toLocalDate());
 

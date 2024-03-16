@@ -56,6 +56,7 @@ public class AccountController {
                     .put("statement", user.getStatement())
                     .put("token", jwt)
                     .put("lastUpdate", user.getLastUpdate())
+                    .put("admin", user.getAdmin())
                     .map()
                 ).map());
     }

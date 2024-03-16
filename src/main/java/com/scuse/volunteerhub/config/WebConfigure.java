@@ -1,8 +1,11 @@
 package com.scuse.volunteerhub.config;
 
 
+import com.scuse.volunteerhub.interceptor.LoginCheckInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.time.LocalDate;
@@ -10,14 +13,14 @@ import java.time.format.DateTimeFormatter;
 
 @Configuration
 public class WebConfigure implements WebMvcConfigurer {
-//    @Autowired
-//    private LoginCheckInterceptor loginCheckInterceptor;
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(loginCheckInterceptor)
-//                .addPathPatterns("/**")
-//                .excludePathPatterns("/login");
-//    }
+    @Autowired
+    private LoginCheckInterceptor loginCheckInterceptor;
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(loginCheckInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/login", "/register", "/volunteerhub-service.log", "/backup.sql", "/**.jpg", "/**.png", "/changeURL", "/*.mp4");
+    }
 
     /**
      * 将全局接收的前端发来的日期字符串自动转换为日期格式

@@ -16,27 +16,21 @@ import lombok.Setter;
  * </p>
  *
  * @author DL
- * @since 2024-03-12 03:12:46
+ * @since 2024-03-14 11:57:45
  */
 @Getter
 @Setter
-@TableName("m_videomap")
-public class Videomap implements Serializable {
+@TableName("m_cloudvideomap")
+public class Cloudvideomap implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private Long seqId;
-
-    private Long userid;
-
     private String title;
 
     private String cover;
-
-    private String path;
 
     private String link;
 
@@ -44,4 +38,6 @@ public class Videomap implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
+
+    private Integer type;
 }

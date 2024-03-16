@@ -19,12 +19,13 @@ import lombok.Setter;
  * </p>
  *
  * @author DL
- * @since 2024-03-01 04:15:22
+ * @since 2024-03-15 02:44:11
  */
 @Getter
 @Setter
 @TableName("m_user")
 public class User implements Serializable {
+
 
     private static final long serialVersionUID = 1L;
 
@@ -61,4 +62,6 @@ public class User implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate lastUpdate;
+
+    private Integer admin;
 }

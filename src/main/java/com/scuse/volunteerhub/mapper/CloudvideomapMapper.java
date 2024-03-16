@@ -1,6 +1,6 @@
 package com.scuse.volunteerhub.mapper;
 
-import com.scuse.volunteerhub.entity.Artical;
+import com.scuse.volunteerhub.entity.Cloudvideomap;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,9 +10,9 @@ import org.apache.ibatis.annotations.Mapper;
  * </p>
  *
  * @author DL
- * @since 2024-03-05 04:23:35
+ * @since 2024-03-09 03:50:57
  */
 @Mapper
-public interface ArticalMapper extends BaseMapper<Artical> {
+public interface CloudvideomapMapper extends BaseMapper<Cloudvideomap> {
 
 }

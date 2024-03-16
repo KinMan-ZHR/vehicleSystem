@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -19,14 +21,25 @@ public class Headline implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @NotBlank(message = "头条的标题不能为空")
     private String headlineTitle;
-
-    @NotBlank(message = "头条的图片不能为空")
     private String headlineImage;
+    private LocalDate headlineTime;
+    private String headlineSource;
+    private String headlineText;
 
-    @NotBlank(message = "头条的链接不能为空")
-    private String headlineLink;
-
-
+    public Headline(Long id, String headlineTitle, String headlineImage, LocalDate headlineTime, String headlineSource, String headlineText) {
+        this.id = id;
+        this.headlineTitle = headlineTitle;
+        this.headlineImage = headlineImage;
+        this.headlineTime = headlineTime;
+        this.headlineSource = headlineSource;
+        this.headlineText = headlineText;
+    }
+    public Headline(String headlineTitle, String headlineImage, LocalDate headlineTime, String headlineSource, String headlineText) {
+        this.headlineTitle = headlineTitle;
+        this.headlineImage = headlineImage;
+        this.headlineTime = headlineTime;
+        this.headlineSource = headlineSource;
+        this.headlineText = headlineText;
+    }
 }

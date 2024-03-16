@@ -29,7 +29,5 @@ public class UpdateDto implements Serializable {
 
     private String address;
 
-    private String password;
-
     private String statement;
 }

@@ -1,12 +1,16 @@
 web:
-    avatar-path: D:/dev/JavaProjects/avatar/
-    video-path: D:/dev/JavaProjects/video/
-    videocover-path: D:/dev/JavaProjects/videocover/
+    avatar-path: D:/programme/JavaLanguage/Project/volBack/avatar/
+    video-path: D:/programme/JavaLanguage/Project/volBack/video/
+    videocover-path: D:/programme/JavaLanguage/Project/volBack/videocover/
+    backupSql-path: D:/programme/JavaLanguage/Project/volBack/backupSql/
+    logs-path: D:/programme/JavaLanguage/Project/volBack/volunteerhub/logs/
+    cloudvideo-path: D:/programme/JavaLanguage/Project/volBack/cloudvideo/
+
 # DataSource Config
 spring:
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/volunteerhub?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+        url: jdbc:mysql://localhost:3306/volunteerhub?useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
         username: root
         password: root
     servlet:
@@ -16,9 +20,10 @@ spring:
     web:
         resources:
             # 注意这里的配置，如果不配置，可能会导致静态资源无法访问，资源访问的链接的相对路径不能包括下面路径头
-            static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/, file:${web.avatar-path}, file:${web.video-path}, file:${web.videocover-path}
+            static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/, file:${web.avatar-path}, file:${web.video-path}, file:${web.videocover-path}, file:${web.backupSql-path}, file:${web.logs-path}, file:${web.cloudvideo-path}
 
 server:
+    port: 8082
     servlet:
         connection-payload-size: -1
 
@@ -29,3 +34,17 @@ volunteerhub:
         secret: f4e2e52034348f86b67cde581c0f9eb5
         expire: 604800
         header: Authorization
+
+logging:
+    file:
+        # 输出的log文件名
+        name: volunteerhub-service
+        # 输出的文件的路径
+        path: ./logs
+    level:
+        # 输出级别
+        root: warn
+        # 特定的mapper下的输出级别
+#        com.example.demo.mapper: debug
+    # xml配置文件
+    config: classpath:logback-spring.xml

@@ -17,12 +17,12 @@ import lombok.Setter;
  * </p>
  *
  * @author DL
- * @since 2024-03-06 02:37:25
+ * @since 2024-03-06 04:26:42
  */
 @Getter
 @Setter
-@TableName("m_artical")
-public class Artical implements Serializable {
+@TableName("m_article")
+public class Article implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -44,5 +44,5 @@ public class Artical implements Serializable {
 
     private Long clickCount;
 
-    private Long hotness;
+    private Double hotness;
 }

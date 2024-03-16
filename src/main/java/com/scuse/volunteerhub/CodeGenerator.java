@@ -24,7 +24,7 @@ public class CodeGenerator {
                 })
                 // 策略配置
                 .strategyConfig(builder -> {
-                    builder.addInclude("m_artical") // 设置需要生成的表名
+                    builder.addInclude("m_user") // 设置需要生成的表名
                             .addTablePrefix("m_") // 设置过滤表前缀
                             // Entity 策略配置
                             .entityBuilder()

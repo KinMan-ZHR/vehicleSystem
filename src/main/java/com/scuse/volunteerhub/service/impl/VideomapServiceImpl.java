@@ -1,5 +1,6 @@
 package com.scuse.volunteerhub.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.scuse.volunteerhub.entity.Videomap;
 import com.scuse.volunteerhub.mapper.VideomapMapper;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -93,7 +95,14 @@ public class VideomapServiceImpl extends ServiceImpl<VideomapMapper, Videomap> i
     }
 
     @Override
-    public Page<Videomap> getUserPageList(Page<Videomap> page) {
+    public Page<Videomap> getVideoPageList(Page<Videomap> page) {
         return videomapMapper.selectPage(page, null);
     }
+
+    @Override
+    public List<Videomap> getVideoList(QueryWrapper<Videomap> wrapper) {
+        return videomapMapper.selectList(wrapper);
+    }
+
+
 }
