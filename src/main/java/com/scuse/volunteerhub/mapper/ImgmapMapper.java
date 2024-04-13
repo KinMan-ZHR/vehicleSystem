@@ -8,8 +8,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  *  Mapper 接口
  * </p>
  *
- * @author DL
- * @since 2024-03-02 05:11:53
+ * @author KinMan谨漫
+ * @since 2024-04-13 05:11:53
  */
 public interface ImgmapMapper extends BaseMapper<Imgmap> {
 

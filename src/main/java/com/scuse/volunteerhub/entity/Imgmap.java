@@ -1,20 +1,16 @@
 package com.scuse.volunteerhub.entity;
 
+/**
+ * created by KinMan谨漫 on 2024/4/13 16:59
+ *
+ * @author KinMan谨漫
+ */
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
-
-/**
- * <p>
- * 
- * </p>
- *
- * @author DL
- * @since 2024-03-02 05:11:53
- */
 @Getter
 @Setter
 @TableName("m_imgmap")

@@ -11,7 +11,7 @@ public class CodeGenerator {
         FastAutoGenerator.create("jdbc:mysql://localhost:3306/volunteerhub?characterEncoding=UTF-8&useUnicode=true&useSSL=false", "root", "root")
                 // 全局配置
                 .globalConfig(builder -> {
-                    builder.author("DL") // 设置作者
+                    builder.author("KinMan") // 设置作者
                             .commentDate("yyyy-MM-dd hh:mm:ss")   //注释日期
                             .outputDir(System.getProperty("user.dir") + "/src/main/java") // 指定输出目录
                             .disableOpenDir() //禁止打开输出目录，默认打开
